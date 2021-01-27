@@ -13,3 +13,4 @@ server.listen(3000,()=>{
 })
 
 server.get("/countries/:country",covidService.getCovidDetailByCountry)
+server.get("/countries/promise/:country",covidService.getCovidDetailByCountryPromise)
