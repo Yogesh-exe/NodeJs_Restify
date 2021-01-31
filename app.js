@@ -1,5 +1,5 @@
 const restify = require('restify')
-const covidService =require('./service/CovidGateWayService')
+const covidService =require('./src/service/CovidGateWayService')
 const server = restify.createServer()
 
 const logger=(req,res,next)=>{
@@ -12,5 +12,10 @@ server.listen(3000,()=>{
     console.log(`Server started on ${server.url}`)
 })
 
+
 server.get("/countries/:country",covidService.getCovidDetailByCountry)
 server.get("/countries/promise/:country",covidService.getCovidDetailByCountryPromise)
+
+process.on('exit',()=>{
+    server.close(()=>{console.log('closing server.')});
+})
